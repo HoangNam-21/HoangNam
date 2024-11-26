@@ -1,0 +1,53 @@
+//DoHoangNam-2280601990
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Student
+{
+    public int Maso{get;set;}
+    public string Ten{get;set;}
+    public int Tuoi{get;set;}
+}
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        List<Student> students = new List<Student>
+        {
+            new Student{Maso = 1, Ten = "Nam", Tuoi = 17},
+            new Student{Maso = 2, Ten = "Nhu", Tuoi = 19},
+            new Student{Maso = 3, Ten = "Vinh", Tuoi = 16},
+            new Student{Maso = 4, Ten = "An", Tuoi = 15},
+            new Student{Maso = 5, Ten = "Anh", Tuoi = 18}
+        };
+
+        // a
+        Console.WriteLine("Danh sach toan bo hoc sinh:");
+        students.ForEach(s => Console.WriteLine($"Maso:{s.Maso} - Ten:{s.Ten} - Tuoi:{s.Tuoi}"));
+
+        // b
+        var Tuoitu15den18 = students.Where(s => s.Tuoi >= 15 && s.Tuoi <= 18).ToList();
+        Console.WriteLine("\nDanh sach hoc sinh co tuoi tu 15 den 18:");
+        Tuoitu15den18.ForEach(s => Console.WriteLine($"Maso:{s.Maso} - Ten:{s.Ten} - Tuoi:{s.Tuoi}"));
+
+        // c
+        var TenBatDauTuA = students.Where(s => s.Ten.StartsWith("A")).ToList(); 
+        Console.WriteLine("\nHoc sinh co ten bat dau bang chu 'A':");
+        TenBatDauTuA.ForEach(s => Console.WriteLine($"Maso: {s.Maso} - Ten: {s.Ten} - Tuoi: {s.Tuoi}"));
+
+        // d
+        int TongTuoi = students.Sum(s => s.Tuoi);
+        Console.WriteLine($"\nTong so tuoi cua tat ca hoc sinh:\n{TongTuoi}");
+
+        // e
+        var TuoiLonNhat = students.OrderByDescending(s => s.Tuoi).FirstOrDefault();
+        Console.WriteLine($"\nHoc sinh co tuoi lon nhat:\nMaso:{TuoiLonNhat.Maso} - Ten:{TuoiLonNhat.Ten} - Tuoi:{TuoiLonNhat.Tuoi}");
+
+        // f
+        var TuoiTangDan = students.OrderBy(s => s.Tuoi).ToList();
+        Console.WriteLine("\nDanh sach hoc sinh sap xep theo tuoi tang dan:");
+        TuoiTangDan.ForEach(s => Console.WriteLine($"Maso:{s.Maso} - Ten:{s.Ten} - Tuoi:{s.Tuoi}"));
+    }
+}
